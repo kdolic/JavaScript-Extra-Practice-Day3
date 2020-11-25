@@ -116,12 +116,32 @@ TASK 4 🚀
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
+function GameObject(createdAt, name, dimensions){
+  this.createdAt = createdAt;
+  this.name = name;
+  this.dimensions = dimensions;
+}
+
+GameObject.prototype.destroy = function(){
+  return `${this.name} was removed from the game.`
+}
 /*
   === CharacterStats ===
   * healthPoints
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
+
+function CharacterStats(createdAt, name, dimensions, healthPoints){
+  GameObject.call(this, createdAt, name, dimensions)
+  this.healthPoints = healthPoints;
+}
+
+CharacterStats.prototype = Object.create(GameObject.prototype);
+
+CharacterStats.prototype.takeDamage = function(object){
+  return `${object.name} took damage.`
+}
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -133,6 +153,18 @@ TASK 4 🚀
   * should inherit takeDamage() from CharacterStats
 */
  
+function Humanoid(healthPoints, team, weapons, language){
+  CharacterStats.call(this, healthPoints)
+  this.team = team;
+  this.weapons = weapons;
+  this.language = language;
+}
+
+Humanoid.prototype = Object.create(CharacterStats.prototype);
+
+Humanoid.prototype.greet = function(object){
+  return `${object.name} offers a greeting in ${object.language}.`
+}
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
@@ -141,7 +173,7 @@ TASK 4 🚀
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -199,7 +231,7 @@ TASK 4 🚀
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+
 
 
 
@@ -210,3 +242,5 @@ TASK 4 🚀
 TASK 5 🚀
 // convert the constructor functions above to class syntax copy and paste the objects and console logs below the class syntax to test if your code is working
  */
+
+ 
