@@ -243,4 +243,43 @@ TASK 5 🚀
 // convert the constructor functions above to class syntax copy and paste the objects and console logs below the class syntax to test if your code is working
  */
 
- 
+class GameObject {
+constructor(attrs){
+  this.createdAt = attrs.createdAt;
+  this.name = attrs.name;
+  this.dimensions = attrs.dimensions;
+}
+
+destroy(){
+  return `${this.name} was removed from the game.`
+}
+}
+
+
+
+class CharacterStats extends GameObject {
+constructor(attrs){
+  super(attrs);
+  this.healthPoints = healthPoints;
+}
+
+takeDamage(object){
+  return `${object.name} took damage.`
+}
+}
+
+
+
+class Humanoid extends CharacterStats{
+  constructor(attrs){
+  super(attrs);
+  this.team = team;
+  this.weapons = weapons;
+  this.language = language;
+}
+
+greet(object){
+  return `${object.name} offers a greeting in ${object.language}.`
+}
+
+}
